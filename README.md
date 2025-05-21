@@ -1,6 +1,6 @@
 # Finer FinMark: Scalable Data Pipeline
 
-This repository contains the full analytics pipeline and data cleaning solution for **Project Finer FinMark** — a major system upgrade initiative to help FinMark Corporation scale from 500 to 3,000+ daily orders. The project addresses performance bottlenecks, missing real-time insights, and the need for privacy-compliant data systems.
+This repository contains the full analytics pipeline and data cleaning solution for **Project Finer FinMark** — a major system upgrade initiative to help FinMark Corporation scale from **500 to 3,000+ daily orders**. The project addresses performance bottlenecks, missing real-time insights, and the need for privacy-compliant data systems.
 
 ---
 
@@ -14,38 +14,7 @@ This repository contains the full analytics pipeline and data cleaning solution 
 ---
 
 ## Folder Structure 
-finer-finmark-data-pipeline/
-├── data/
-│ ├── raw/ # Original files (event_logs.csv, etc.)
-│ ├── cleaned/ # Cleaned datasets (final_cleaned_*.csv)
-│ └── reports/ # PDF reports used as references
-│
-├── notebooks/ # Jupyter notebooks for cleaning + EDA
-│ ├── cleaned_event_logs.ipynb
-│ ├── cleaned_marketing_summary.ipynb
-│ └── cleaned_trend_report.ipynb
-│
-├── visuals/ # All images, diagrams, dashboards
-│ ├── current_pipeline.png
-│ ├── proposed_pipeline.png
-│ ├── FinMark_Control_Hub.png
-│ ├── Real-Time_Order_Operations.png
-│ ├── User_Journey_Feature_Usage.png
-│ ├── Conversion_Campaign_Insights.png
-│ └── Forecast_Planning.png
-│
-├── pipeline/ # (Optional) Scripts for ETL / Airflow / Alerts
-│ ├── airflow_dag_sample.py
-│ ├── slack_alert_template.py
-│ └── dbt_models/
-│
-├── dashboard_specs/ # Layouts, widget descriptions, KPIs
-│ ├── control_hub_overview.md
-│ └── panel_breakdowns.md
-│
-├── README.md # Final documentation
-├── .gitignore # Ignore .ipynb_checkpoints, etc.
-└── requirements.txt # Environment packages
+<pre> ``` finer-finmark-data-pipeline/ ├── data/ │ ├── raw/ # Original files (event_logs.csv, etc.) │ ├── cleaned/ # Cleaned datasets (final_cleaned_*.csv) │ └── reports/ # PDF reports used as references │ ├── notebooks/ # Jupyter notebooks for cleaning + EDA │ ├── cleaned_event_logs.ipynb │ ├── cleaned_marketing_summary.ipynb │ └── cleaned_trend_report.ipynb │ ├── visuals/ # All images, diagrams, dashboards │ ├── current_pipeline.png │ ├── proposed_pipeline.png │ ├── FinMark_Control_Hub.png │ ├── Real-Time_Order_Operations.png │ ├── User_Journey_Feature_Usage.png │ ├── Conversion_Campaign_Insights.png │ └── Forecast_Planning.png │ ├── pipeline/ # (Optional) Scripts for ETL / Airflow / Alerts │ ├── airflow_dag_sample.py │ ├── slack_alert_template.py │ └── dbt_models/ │ ├── dashboard_specs/ # Layouts, widget descriptions, KPIs │ ├── control_hub_overview.md │ └── panel_breakdowns.md │ ├── README.md # Final documentation ├── .gitignore # Ignore .ipynb_checkpoints, etc. └── requirements.txt # Environment packages ``` </pre>
 
 
 ---
