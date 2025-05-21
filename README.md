@@ -14,18 +14,19 @@ This repository contains the full analytics pipeline and data cleaning solution 
 ---
 
 ## Folder Structure 
+```bash
 finer-finmark-data-pipeline/
 ├── data/
 │ ├── raw/ # Original files (event_logs.csv, etc.)
 │ ├── cleaned/ # Cleaned datasets (final_cleaned_*.csv)
 │ └── reports/ # PDF reports used as references
 │
-├── notebooks/
+├── notebooks/ # Jupyter notebooks for cleaning + EDA
 │ ├── cleaned_event_logs.ipynb
 │ ├── cleaned_marketing_summary.ipynb
 │ └── cleaned_trend_report.ipynb
 │
-├── visuals/
+├── visuals/ # All images, diagrams, dashboards
 │ ├── current_pipeline.png
 │ ├── proposed_pipeline.png
 │ ├── FinMark_Control_Hub.png
@@ -34,19 +35,19 @@ finer-finmark-data-pipeline/
 │ ├── Conversion_Campaign_Insights.png
 │ └── Forecast_Planning.png
 │
-├── pipeline/
+├── pipeline/ # (Soon) Scripts for ETL / Airflow / Alerts
 │ ├── airflow_dag_sample.py
 │ ├── slack_alert_template.py
 │ └── dbt_models/
 │
-├── dashboard_specs/
+├── dashboard_specs/ # Layouts, widget descriptions, KPIs
 │ ├── control_hub_overview.md
 │ └── panel_breakdowns.md
 │
 ├── README.md
 ├── .gitignore
 └── requirements.txt
-
+```
 
 ---
 
