@@ -85,7 +85,7 @@ The database contains the following tables:
 ## Example
 
 **Input:**  
-A file named `event_log_2023_06.csv` containing raw event log data.
+A file named `event_logs.csv` containing raw event log data.
 
 **Output:**  
 Cleaned records are inserted into the `event_logs` table in `finmark_database.db`.  
@@ -98,10 +98,13 @@ Each record receives a unique, autoincremented `event_id`.
 - Python 3.8+
 - pandas
 - SQLAlchemy
+- numpy
+- Flask (Initiate Database)
+- pandera (Schema Validation)
 
 Install dependencies:
 ```bash
-pip install pandas sqlalchemy
+pip install pandas sqlalchemy, pandas, numpy, flask
 ```
 
 ---

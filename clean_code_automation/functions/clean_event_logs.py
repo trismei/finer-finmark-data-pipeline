@@ -3,11 +3,13 @@ import pandas as pd
 
 # Function to clean event logs data
 
-def clean_event_logs(dataframe):
+def clean_event_logs(df, headers):
 
-    slice_column = 5
-    headers = ['user_id', 'event_type', 'event_time', 'product_id', 'amount']
-    df = pd.read_csv(dataframe, header=None, names=headers, usecols=range(slice_column))
+    # slice_column = 5
+    # headers = ['user_id', 'event_type', 'event_time', 'product_id', 'amount']
+    # df = pd.read_csv(dataframe, header=None, names=headers, usecols=range(slice_column))
+    #Clean the dataframe to the required headers
+    df = df[headers]
 
     # Check if the df is empty
     if df.empty:

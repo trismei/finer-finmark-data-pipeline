@@ -1,10 +1,8 @@
 import pandas as pd
 
-def clean_marketing_summary(dataframe):
+def clean_marketing_summary(df, headers):
 
-    slice_column = 5
-    headers = ['date', 'users_active', 'total_sales', 'new_customers', 'report_generated']
-    df = pd.read_csv(dataframe, header=None, names=headers, usecols=range(slice_column))
+    df = df[headers]
 
     # Check if the df is empty
     if df.empty:

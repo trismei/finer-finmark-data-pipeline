@@ -1,11 +1,9 @@
 import pandas as pd
 from datetime import datetime, timedelta
 
-def clean_trend_report(dataframe):
-    # Slice the DataFrame to keep only the first three columns
-    headers = ['week', 'avg_users', 'sales_growth_rate']
-    slice_column = 3
-    df = pd.read_csv(dataframe, header=None, names=headers, usecols=range(slice_column))
+def clean_trend_report(df, headers):
+    # Initially clean the DataFrame to the required headers
+    df = df[headers]
 
     # Check if the DataFrame is empty
     if df.empty:
