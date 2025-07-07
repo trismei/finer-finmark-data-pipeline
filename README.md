@@ -12,41 +12,81 @@ This repository contains the full analytics pipeline and data cleaning solution 
 - ✅ Support predictive forecasting to anticipate order surges, restocking needs, and user growth
 
 ---
+## Quick Start
 
+### Clone the Repository
+```bash
+git clone <repo-url>
+cd finer-finmark-data-pipeline
+```
+
+### macOS / Linux
+```bash
+python3 -m venv env
+source env/bin/activate
+pip install -r requirements.txt
+```
+
+### Windows (PowerShell)
+```powershell
+py -m venv env
+.\env\Scripts\Activate.ps1
+pip install -r requirements.txt
+```
+
+Raw CSV files belong in `clean_code_automation/datasets`. Run the cleaner:
+```bash
+python clean_code_automation/clean_data_main.py datasets/<your_file.csv>
+```
+Cleaned data is written to `finmark_database.db`.
+
+For troubleshooting tips see
+[`docs/TROUBLESHOOTING.md`](docs/TROUBLESHOOTING.md). A detailed
+progress log is available in
+[`docs/PROJECT_NOTES.md`](docs/PROJECT_NOTES.md).
+
+---
 ## Folder Structure 
 ```bash
 finer-finmark-data-pipeline/
-├── data/
-│ ├── raw/ # Original files (event_logs.csv, etc.)
-│ ├── cleaned/ # Cleaned datasets (final_cleaned_*.csv)
-│ └── reports/ # PDF reports used as references
-│
-├── notebooks/ # Jupyter notebooks for cleaning + EDA
-│ ├── cleaned_event_logs.ipynb
-│ ├── cleaned_marketing_summary.ipynb
-│ └── cleaned_trend_report.ipynb
-│
-├── visuals/ # All images, diagrams, dashboards
-│ ├── current_pipeline.png
-│ ├── proposed_pipeline.png
-│ ├── FinMark_Control_Hub.png
-│ ├── Real-Time_Order_Operations.png
-│ ├── User_Journey_Feature_Usage.png
-│ ├── Conversion_Campaign_Insights.png
-│ └── Forecast_Planning.png
-│
-├── pipeline/ # (Soon) Scripts for ETL / Airflow / Alerts
-│ ├── airflow_dag_sample.py
-│ ├── slack_alert_template.py
-│ └── dbt_models/
-│
-├── dashboard_specs/ # Layouts, widget descriptions, KPIs
-│ ├── control_hub_overview.md
-│ └── panel_breakdowns.md
-│
-├── README.md
-├── .gitignore
-└── requirements.txt
+├── clean_code_automation/               # data cleaning package
+│   ├── README.md                        # overview and usage of the cleaner
+│   ├── clean_data_main.py               # entry point to run the cleaner
+│   ├── datasets/                        # raw CSV inputs
+│   │   ├── event_logs.csv
+│   │   ├── marketing_summary.csv
+│   │   ├── trend_report.csv
+│   │   └── cleaned/                     # timestamped outputs
+│   └── functions/                       # cleaning helpers
+│       ├── clean_event_logs.py
+│       ├── clean_marketing_summary.py
+│       ├── clean_trend_report.py
+│       └── schema_validation.py
+├── sql-data-storage/                    # database utilities
+│   ├── README.md
+│   └── src/
+│       ├── main.py
+│       ├── db/
+│       │   ├── connection.py
+│       │   ├── initialize_db.py
+│       │   ├── models.py
+│       │   └── utils.py
+│       └── ingest/
+│           └── load_data.py
+├── docs/                                # project notes and troubleshooting
+│   ├── PROJECT_NOTES.md
+│   └── TROUBLESHOOTING.md
+├── cleaned_event_logs.ipynb             # notebook examples
+├── cleaned_marketing_summary.ipynb
+├── cleaned_trend_report.ipynb
+├── event_logs.csv                       # sample raw data
+├── marketing_summary.csv
+├── trend_report.csv
+├── final_cleaned_event_logs.csv         # sample cleaned outputs
+├── final_cleaned_marketing_summary.csv
+├── final_cleaned_trend_report.csv
+├── requirements.txt
+└── README.md
 ```
 
 ---
