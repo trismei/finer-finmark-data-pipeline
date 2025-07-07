@@ -25,6 +25,9 @@ class MarketingSummary(Base):
     new_customers = Column(Integer, nullable=False)
     report_date = Column(Date, nullable=False)
     report_time = Column(Time, nullable=False)
+    percent_customer_change_per_day = Column(Numeric(5,2), nullable=False)
+    sales_growth_rate = Column(Numeric(5,2), nullable=False)
+    average_sales_per_user = Column(Numeric(10,2), nullable=False)
 
 class TrendReport(Base):
     __tablename__ = 'trend_report'
@@ -34,4 +37,5 @@ class TrendReport(Base):
     week_end = Column(Date, nullable=False)
     avg_users = Column(Integer, nullable=False)
     sales_growth_rate = Column(Numeric(5,3), nullable=False)
+
 

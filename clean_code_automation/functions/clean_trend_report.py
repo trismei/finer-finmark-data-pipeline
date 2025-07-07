@@ -18,7 +18,7 @@ def clean_trend_report(df, headers):
         #Position the new columns at the beginning
         df = df[['week_start', 'week_end'] + [col for col in df.columns if col not in ['week_start', 'week_end']]]
     except Exception as e:
-        print(f"Error processing 'week' column: {e}")
+        print(f"Error: {e}")
         return df
     
     return df

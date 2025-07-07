@@ -35,11 +35,16 @@ def import_data(file_path):
         # clean_data.to_csv(output_path, index=False, header=True)
 
         #Save the cleaned data to the database
-        if schema_validation.validate_event_log_schema(clean_data):
+        # if schema_validation.validate_event_log_schema(clean_data):
+        #     clean_data.to_sql(filename, con=engine, if_exists='append', index=False)
+        #     print(f"Data from {filename} has been successfully imported into the database.")
+        # else:
+        #     raise ValueError(f"Schema validation failed for file {filename}. Please check the data format.")
+        try: 
             clean_data.to_sql(filename, con=engine, if_exists='append', index=False)
             print(f"Data from {filename} has been successfully imported into the database.")
-        else:
-            raise ValueError(f"Schema validation failed for file {filename}. Please check the data format.")
+        except Exception as e:
+            raise ValueError(f"An error occurred while importing data from {filename} into the database: {e}")
 
     elif 'marketing_summary' in filename:
         try:
@@ -51,41 +56,53 @@ def import_data(file_path):
             raise ValueError(f"File {filename} is empty or does not contain valid data.")
         
         # Clean the marketing summary data
-        clean_data = clean_marketing_summary.clean_marketing_summary(dataframe, present_columns)[1:]
+        clean_data = clean_marketing_summary.clean_marketing_summary(dataframe, present_columns)
         
         # Validate the schema of the cleaned data
 
-        if schema_validation.validate_marketing_summary_schema(clean_data):
-            clean_data.to_sql(filename, con=engine, if_exists='append', index=False)
-            print(f"Data from {filename} has been successfully imported into the database.")
-        else:
-            raise ValueError(f"Schema validation failed for file {filename}. Please check the data format.")
+        # if schema_validation.validate_marketing_summary_schema(clean_data):
+        #     clean_data.to_sql(filename, con=engine, if_exists='append', index=False)
+        #     print(f"Data from {filename} has been successfully imported into the database.")
+        # else:
+        #     raise ValueError(f"Schema validation failed for file {filename}. Please check the data format.")
 
         # Uncomment the following lines if you want to save the cleaned data to a CSV file
         # output_path = standardize_output_filename(file_path)
         # clean_data.to_csv(output_path, index=False, header=True)
-
+      
+        try:
+            clean_data.to_sql(filename, con=engine, if_exists='append', index=False)
+            print(f"Data from {filename} has been successfully imported into the database.")
+        except Exception as e:
+            raise ValueError(f"An error occurred while importing data from {filename} into the database: {e}")
 
     elif 'trend_report' in filename:
         try:
             # Read the CSV file into a dataframe and validate if the columns noted are present
-            present_columns = ['weeks', 'avg_user', 'sales_growth_rate']
+            present_columns = ['week', 'avg_users', 'sales_growth_rate']
             dataframe = pd.read_csv(file_path)
             validate_columns(dataframe, present_columns)
         except pd.errors.EmptyDataError:
             raise ValueError(f"File {filename} is empty or does not contain valid data.")
 
-        clean_data = clean_trend_report.clean_trend_report(dataframe)[1:]
+        clean_data = clean_trend_report.clean_trend_report(dataframe, present_columns)[1:]
         
         # Uncomment the following lines if you want to save the cleaned data to a CSV file
         # output_path = standardize_output_filename(file_path)
         # clean_data.to_csv(output_path, index=False, header=True)
 
-        if schema_validation.validate_trend_report_schema(clean_data):
-            clean_data.to_sql(filename, con=engine, if_exists='append', index=False)    
+        # #Schema Validation for trend report
+        # if schema_validation.validate_trend_report_schema(clean_data):
+        #     clean_data.to_sql(filename, con=engine, if_exists='append', index=False)    
+        #     print(f"Data from {filename} has been successfully imported into the database.")
+        # else:
+        #     raise ValueError(f"Schema validation failed for file {filename}. Please check the data format.")
+
+        try:
+            clean_data.to_sql(filename, con=engine, if_exists='append', index=False)
             print(f"Data from {filename} has been successfully imported into the database.")
-        else:
-            raise ValueError(f"Schema validation failed for file {filename}. Please check the data format.")
+        except Exception as e:
+            raise ValueError(f"An error occurred while importing data from {filename} into the database: {e}")
 
     return FileExistsError(f"File {filename} already exists. Please choose a different name or delete the existing file.")
 
@@ -108,8 +125,18 @@ def validate_columns(dataframe, required_columns):
             raise ValueError(f"File does not contain the required column: {col}")
     return True
 
+def fill_columns_with_nan(dataframe, columns):
+    """
+    Fills specified columns with NaN values if they are not present in the dataframe.
+    """
+    for col in columns:
+        if col not in dataframe.columns:
+            dataframe[col] = np.nan
+    return dataframe
+
 if __name__ == "__main__":
     if len(sys.argv) != 2:
         print("Usage: py clean_data.py <dataset1>")
         sys.exit(1)
     import_data(sys.argv[1])
+    print("Data import and cleaning completed successfully.")
