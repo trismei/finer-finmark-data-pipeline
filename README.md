@@ -126,6 +126,8 @@ See all mockups in `/visuals`.
 Data Analyst | System Architect | Strategy Consultant  
 📍 MMDC | 🎓 BSIT Major in Data Analytics
 
+For a detailed setup guide and project progress notes, see
+[`docs/PROJECT_NOTES.md`](docs/PROJECT_NOTES.md).
 
 ---
 
