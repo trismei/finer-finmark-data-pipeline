@@ -1,6 +1,7 @@
 # Project Setup & Progress Log
 
 This document summarizes how to get the data pipeline running, what worked, and the current blockers.
+See [`TROUBLESHOOTING.md`](TROUBLESHOOTING.md) for common setup issues.
 
 ## Setup Instructions
 ### 1. Clone this repository
@@ -52,3 +53,13 @@ Cleaned data is saved to the SQLite database `finmark_database.db`.
 - Add a `.gitignore` and remove unnecessary files from version control.
 - Provide screenshots of the working pipeline once available.
 - Implement unit tests for the cleaning modules.
+
+## Troubleshooting Summary
+For quick reference, here are some common setup problems:
+
+- **PowerShell:** `execution of scripts is disabled`. Run `Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope CurrentUser`.
+- **Missing Python or `pip`:** Ensure Python 3 is installed (e.g., `brew install python3` or `sudo apt-get install python3 python3-pip`).
+- **Database Permission Errors:** Verify write access to `finmark_database.db` or use the `--output` flag.
+- **Dataset Not Found:** Place raw CSV files in `clean_code_automation/datasets` or provide absolute paths.
+
+See [TROUBLESHOOTING.md](TROUBLESHOOTING.md) for full details.
