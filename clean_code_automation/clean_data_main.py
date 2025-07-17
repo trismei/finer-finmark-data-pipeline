@@ -1,3 +1,10 @@
+"""
+Clean Data Automation Script
+
+This script automates the cleaning and importing of various datasets into a database.
+"""
+
+
 import pandas as pd
 import numpy as np
 import sys
@@ -9,9 +16,21 @@ import functions.schema_validation as schema_validation
 import datetime
 from sqlalchemy import create_engine
 
-def import_data(file_path):
 
+
+# from sql_data_storage.src.db.models import Base
+
+def import_data(file_path):
     dataframe = sys.argv[1]
+
+    # Check if the file path is provided
+    if dataframe is None:
+        raise ValueError("No file path provided. Please provide a valid file path to import data.")
+
+    #Check if the file exists
+    if not os.path.exists(file_path):
+        raise FileNotFoundError(f"The file {dataframe} does not exist. Please provide a valid file path.")
+
     #Initialize the Database connection
     engine = create_engine('sqlite:///finmark_database.db')
 
@@ -23,6 +42,7 @@ def import_data(file_path):
             #Read the CSV file into a dataframe and validate if the columns noted are present
             present_columns = ['user_id', 'event_type', 'event_time', 'product_id', 'amount']
             dataframe = pd.read_csv(file_path)
+            # Validate the columns
             validate_columns(dataframe, present_columns)
         except pd.errors.EmptyDataError:
             raise ValueError(f"File {filename} is empty or does not contain valid data.")

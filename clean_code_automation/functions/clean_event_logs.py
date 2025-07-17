@@ -1,5 +1,5 @@
-import pandas as pd
 
+import pandas as pd
 
 # Function to clean event logs data
 
@@ -18,13 +18,13 @@ def clean_event_logs(df, headers):
         return df
     else:
         # Remove rows with all NaN values
-        cleaned_df = df.dropna(how='any')
+        cleaned_df = df.dropna(how='any').copy()
 
     try:
         cleaned_df['event_time'] = pd.to_datetime(cleaned_df['event_time'], errors='coerce')
         #Separating date time into date time
-        cleaned_df['date'] = cleaned_df['event_time'].dt.date
-        cleaned_df['time'] = cleaned_df['event_time'].dt.time
+        cleaned_df.loc[:,'date'] = cleaned_df['event_time'].dt.date
+        cleaned_df.loc[:,'time'] = cleaned_df['event_time'].dt.time
     except Exception as e:
         print(f"Error: {e}")
         return df

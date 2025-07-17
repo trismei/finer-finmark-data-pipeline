@@ -2,7 +2,7 @@
 
 ## Overview
 
-This project automates the cleaning and storage of financial datasets for the FinerFinmark platform. It processes raw CSV files (event logs, marketing summaries, trend reports), cleans and standardizes the data, and stores the results in a structured SQLite database (`finmark_database.db`) using SQLAlchemy.
+This project automates the cleaning and storage of financial datasets for the Finmark platform. It processes raw CSV files (event logs, marketing summaries, trend reports), cleans and standardizes the data, and stores the results in a structured SQLite database (`finmark_database.db`) using SQLAlchemy.
 
 ---
 
@@ -10,7 +10,7 @@ This project automates the cleaning and storage of financial datasets for the Fi
 
 - **Automated Data Cleaning:**  
   Cleans event logs, marketing summaries, and trend reports using dedicated cleaning functions.
-- **Flexible Input:**  
+- **Converts valid CSV files to Readable Data Array:**  
   Accepts raw CSV files as input.
 - **Database Storage:**  
   Stores cleaned data in normalized tables within an SQLite database.
@@ -31,16 +31,23 @@ This project automates the cleaning and storage of financial datasets for the Fi
 
 ### 2. **Run the Cleaning Script**
 
+
 ```bash
-python clean_data_main.py datasets/{filename}
+python clean_code_automation\clean_data_main.py clean_code_automoation\datasets\{filename}
+```
+
+If running the code elsewhere
+```
+  set PYTHONPATH=E:\MMDC\S3101-PlatformTechnologies_FinerFinmark
+  python clean_code_automation\clean_data_main.py clean_code_automation\datasets\yourfile.csv
 ```
 
 - The script will automatically detect the file type and apply the correct cleaning function.
 
 ### 3. **Output**
 
-- Cleaned data is written directly to the SQLite database:  
-  `sql-data-storage/src/db/finmark_database.db`
+- Cleaned data is written directly to the SQLite database in the Main Folder:  
+  `S3101-PlatformTechnologies_FinerFinmark\finmark_database.db`
 
 ---
 
@@ -69,6 +76,12 @@ The database contains the following tables:
 | new_customers | Integer   | New customers count        |
 | report_date   | Date      | Date of report generation  |
 | report_time   | Time      | Time of report generation  |
+| percent_customer_change_per_day(%)   | float      | Shows the change in customer number per from the previous day. Negative (-) indicates a net loss in customer from previous day, Positive values indicates a net gain from previous day  |
+| sales_growth_rate   | Float      | Shows the change in net sales per from the previous day. Negative (-) indicates a net loss in amount sales from previous day, Positive values indicates a net gain from previous day  |
+| percent_customer_change_per_day(%)   | float      | Shows the change in customer number per from the previous day. Negative (-) indicates a net loss in customer from previous day, Positive values indicates a net gain from previous day  |
+| avg_sales_per_user(P)   | Float      | Shows how much on average each customer spends within the site per day  |
+
+
 
 ### `trend_report`
 | Column        | Type      | Description                |
@@ -84,13 +97,17 @@ The database contains the following tables:
 ## Example
 
 **Input:**  
-A file named `event_logs.csv` containing raw event log data.
+A file named `event_logs.csv` or `marketing_summary.csv` or `trend_report.csv` containing raw data log data.
 
 **Output:**  
 Cleaned records are inserted into the `event_logs` table in `finmark_database.db`.  
 Each record receives a unique, autoincremented `event_id`.
 
 ---
+
+## Error Handling
+
+If the code detects that one or more of the columns are missing. An error will be displayed
 
 ## Requirements
 
